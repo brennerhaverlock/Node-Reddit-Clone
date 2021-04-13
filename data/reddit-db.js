@@ -6,13 +6,11 @@ const url = "mongodb://localhost/reddit-db";
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
-  { 
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
-  
-  },
+  { useNewUrlParser: true },
   function(err, db) {
     assert.equal(null, err);
     console.log("Connected successfully to database");
+    console.log(url);
 
     // db.close(); turn on for testing
   }
