@@ -35,9 +35,9 @@ app.get('/posts/new', (req, res) => {
     res.render('posts-new')
 })
 
+module.exports = app;
+
 //Server start
 app.listen(port, () => {
     console.log(`Example app listening at port ${port}`)
 })
-
-module.exports = app;
