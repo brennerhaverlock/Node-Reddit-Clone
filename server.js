@@ -23,10 +23,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Add after body parser initialization!
 app.use(expressValidator());
 
-
 //Middleware
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+
+var checkAuth = (req, res, next) => {
+    console.log("Checking authentication");
+    if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+      req.user = null;
+    } else {
+      var token = req.cookies.nToken;
+      var decodedToken = jwt.decode(token, { complete: true }) || {};
+      req.user = decodedToken.payload;
+    }
+  
+    next();
+  };
+  app.use(checkAuth);
+
 
 require('./controllers/posts.js')(app);
 require('./data/reddit-db')
@@ -35,9 +50,9 @@ require('./controllers/auth.js')(app);
 
 
 
-app.get('/posts/new', (req, res) => {
-    res.render('posts-new')
-})
+// app.get('/posts/new', (req, res) => {
+//     res.render('posts-new')
+// })
 
 module.exports = app;
 
