@@ -27,6 +27,9 @@ app.use(expressValidator());
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.use(express.static('public'));
+
+
 
 var checkAuth = (req, res, next) => {
     console.log("Checking authentication");
