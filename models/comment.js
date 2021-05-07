@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Populate = require("../utils/autopopulate");
+
 
 const CommentSchema = new Schema({
   content: { type: String, required: true },
